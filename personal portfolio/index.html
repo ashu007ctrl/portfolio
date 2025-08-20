@@ -328,80 +328,87 @@
   </footer>
 
   <!-- SCRIPTS -->
-  <script>
-    // mobile warning
-    function showMobileWarning() {
-      const warning = document.getElementById("mobile-warning");
-      if (window.innerWidth <= 768 && !localStorage.getItem("hideMobileWarning")) {
-        warning.style.display = "flex";
-      } else {
-        warning.style.display = "none";
-      }
+script>
+  // mobile warning
+  function showMobileWarning() {
+    const warning = document.getElementById("mobile-warning");
+    if (window.innerWidth <= 768 && !localStorage.getItem("hideMobileWarning")) {
+      warning.style.display = "flex";
+    } else {
+      warning.style.display = "none";
     }
-    function hideWarning() {
-      const w = document.getElementById("mobile-warning");
-      if (w) w.style.display = "none";
-      localStorage.setItem("hideMobileWarning", "true");
+  }
+  function hideWarning() {
+    const w = document.getElementById("mobile-warning");
+    if (w) w.style.display = "none";
+    localStorage.setItem("hideMobileWarning", "true");
+  }
+  window.addEventListener("load", showMobileWarning);
+  window.addEventListener("resize", showMobileWarning);
+
+  // Hamburger & mobile nav behavior
+  (function () {
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobile-nav');
+    const closeBtn = document.getElementById('close-btn');
+    let animTimeout = null;
+
+    function openMobileNav() {
+      clearTimeout(animTimeout);
+      mobileNav.classList.remove('slide-out');
+      mobileNav.classList.add('slide-in');
+      hamburger.classList.add('open');
+      hamburger.setAttribute('aria-expanded', 'true');
+      mobileNav.setAttribute('aria-hidden', 'false');
+      document.documentElement.style.overflow = 'hidden';
+      document.body.style.touchAction = 'none';
     }
-    window.addEventListener("load", showMobileWarning);
-    window.addEventListener("resize", showMobileWarning);
 
-    // Hamburger & mobile nav behavior
-    (function () {
-      const hamburger = document.getElementById('hamburger');
-      const mobileNav = document.getElementById('mobile-nav');
-      const closeBtn = document.getElementById('close-btn');
-      let animTimeout = null;
-
-      function openMobileNav() {
-        clearTimeout(animTimeout);
+    function closeMobileNav() {
+      clearTimeout(animTimeout);
+      mobileNav.classList.remove('slide-in');
+      mobileNav.classList.add('slide-out');
+      hamburger.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+      mobileNav.setAttribute('aria-hidden', 'true');
+      document.documentElement.style.overflow = '';
+      document.body.style.touchAction = '';
+      // Hide after animation
+      animTimeout = setTimeout(() => {
         mobileNav.classList.remove('slide-out');
-        mobileNav.classList.add('slide-in');
-        hamburger.classList.add('open');
-        hamburger.setAttribute('aria-expanded', 'true');
-        mobileNav.setAttribute('aria-hidden', 'false');
-        document.documentElement.style.overflow = 'hidden';
-        document.body.style.touchAction = 'none';
-      }
+      }, 340);
+    }
 
-      function closeMobileNav() {
-        clearTimeout(animTimeout);
-        mobileNav.classList.remove('slide-in');
-        mobileNav.classList.add('slide-out');
-        hamburger.classList.remove('open');
-        hamburger.setAttribute('aria-expanded', 'false');
-        mobileNav.setAttribute('aria-hidden', 'true');
-        document.documentElement.style.overflow = '';
-        document.body.style.touchAction = '';
-        // Hide after animation
-        animTimeout = setTimeout(() => {
-          mobileNav.classList.remove('slide-out');
-        }, 340);
-      }
+    window.closeMobileNav = closeMobileNav;
 
-      window.closeMobileNav = closeMobileNav;
+    hamburger && hamburger.addEventListener('click', function (e) {
+      e.stopPropagation();
+      const isOpen = mobileNav.classList.contains('slide-in');
+      if (isOpen) closeMobileNav(); else openMobileNav();
+    });
 
-      hamburger && hamburger.addEventListener('click', function (e) {
-        const isOpen = mobileNav.classList.contains('slide-in');
-        if (isOpen) closeMobileNav(); else openMobileNav();
+    closeBtn && closeBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      closeMobileNav();
+    });
+
+    // Close when clicking any mobile nav link
+    var navLinks = mobileNav.querySelectorAll('a');
+    navLinks.forEach(function(link) {
+      link.addEventListener('click', function() {
+        closeMobileNav();
       });
+    });
 
-      closeBtn && closeBtn.addEventListener('click', closeMobileNav);
-
-      document.addEventListener('click', function (e) {
-        if (!mobileNav.contains(e.target) && !hamburger.contains(e.target)) {
-          closeMobileNav();
-        }
-      });
-
-      document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape') closeMobileNav();
-      });
-    })();
-  </script>
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeMobileNav();
+    });
+  })();
+</script>
 
   <!-- AOS init -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>if (window.AOS) AOS.init();</script>
 </body>
 </html>
+
