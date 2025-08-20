@@ -157,29 +157,74 @@
     .hamburger.open .bar-2 { opacity: 0; transform: scaleX(0); }
     .hamburger.open .bar-3 { transform: translateY(-8px) rotate(-45deg); }
 
-    /* Mobile panel */
+    /* Mobile nav panel as a small box, sliding in from right */
     #mobile-nav {
       display: none;
       position: absolute;
-      top: calc(100% + 10px);
-      right: 12px;
-      width: 240px;
-      background: #ffffff;
-      border-radius: 12px;
-      padding: 14px;
-      border: 1px solid rgba(0,0,0,0.06);
-      box-shadow: 0 12px 36px rgba(12, 24, 48, 0.12);
-      transform: translateY(-12px);
+      top: calc(100% + 8px);
+      right: 0;
+  width: 140px;
+      background: #fff;
+      border-radius: 14px 0 14px 14px;
+      padding: 10px 0 6px 0;
+      border: 1px solid #e3e3e3;
+      box-shadow: 0 6px 24px rgba(12, 24, 48, 0.13);
+      transform: translateX(100%) scale(0.98);
       opacity: 0;
       pointer-events: none;
-      transition: transform 300ms cubic-bezier(.2,.9,.2,1), opacity 260ms ease;
       z-index: 3300;
     }
-    #mobile-nav.show {
+    #mobile-nav.slide-in {
       display: block;
-      transform: translateY(0);
-      opacity: 1;
+      animation: slideInRight 0.36s cubic-bezier(.2,.9,.2,1) forwards;
       pointer-events: auto;
+      opacity: 1;
+      transform: translateX(0) scale(1);
+    }
+    #mobile-nav.slide-out {
+      display: block;
+      animation: slideOutRight 0.32s cubic-bezier(.2,.9,.2,1) forwards;
+      pointer-events: none;
+    }
+    @keyframes slideInRight {
+      from { opacity: 0; transform: translateX(100%) scale(0.98); }
+      to   { opacity: 1; transform: translateX(0) scale(1); }
+    }
+    @keyframes slideOutRight {
+      from { opacity: 1; transform: translateX(0) scale(1); }
+      to   { opacity: 0; transform: translateX(100%) scale(0.98); }
+    }
+    #mobile-nav ul {
+  gap: 6px;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+    }
+    #mobile-nav a {
+  padding: 7px 18px;
+  font-size: 1rem;
+  text-align: center;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  color: #111;
+  font-weight: 700;
+  border-radius: 6px;
+    }
+    #mobile-nav a:hover {
+      background: rgba(122,24,245,0.06);
+      color: #7a18f5;
+    }
+    #mobile-nav .close-btn {
+      margin-bottom: 2px;
+      font-size: 18px;
+      text-align: right;
+      font-weight: 700;
+      cursor: pointer;
+      color: #111;
+      line-height: 1;
     }
 
     #mobile-nav .close-btn {
@@ -242,6 +287,52 @@
   </style>
 </head>
 <body>
+  <!-- Hamburger & mobile nav JS (copied from index.html) -->
+  <script>
+    (function () {
+      const hamburger = document.getElementById('hamburger');
+      const mobileNav = document.getElementById('mobile-nav');
+      const closeBtn = document.getElementById('close-btn');
+      let animTimeout = null;
+      function openMobileNav() {
+        clearTimeout(animTimeout);
+        mobileNav.classList.remove('slide-out');
+        mobileNav.classList.add('slide-in');
+        hamburger.classList.add('open');
+        hamburger.setAttribute('aria-expanded', 'true');
+        mobileNav.setAttribute('aria-hidden', 'false');
+        document.documentElement.style.overflow = 'hidden';
+        document.body.style.touchAction = 'none';
+      }
+      function closeMobileNav() {
+        clearTimeout(animTimeout);
+        mobileNav.classList.remove('slide-in');
+        mobileNav.classList.add('slide-out');
+        hamburger.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+        mobileNav.setAttribute('aria-hidden', 'true');
+        document.documentElement.style.overflow = '';
+        document.body.style.touchAction = '';
+        animTimeout = setTimeout(() => {
+          mobileNav.classList.remove('slide-out');
+        }, 340);
+      }
+      window.closeMobileNav = closeMobileNav;
+      hamburger && hamburger.addEventListener('click', function (e) {
+        const isOpen = mobileNav.classList.contains('slide-in');
+        if (isOpen) closeMobileNav(); else openMobileNav();
+      });
+      closeBtn && closeBtn.addEventListener('click', closeMobileNav);
+      document.addEventListener('click', function (e) {
+        if (!mobileNav.contains(e.target) && !hamburger.contains(e.target)) {
+          closeMobileNav();
+        }
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') closeMobileNav();
+      });
+    })();
+  </script>
   <!-- optional mobile warning -->
   <div id="mobile-warning" class="mobile-warning" style="display:none;">
     <span class="warning-text">For the best experience, please switch to Desktop Mode.</span>
@@ -276,7 +367,7 @@
         <div class="close-btn" id="close-btn" aria-label="Close menu">&times;</div>
         <ul>
           <li><a href="index.html" onclick="closeMobileNav()">Home</a></li>
-          <li><a href="portfolio.html" onclick="closeMobileNav()">Portfolio</a></li>
+          <li><a href="portfolio.html" onclick="closeMobileNav()">Projects</a></li>
           <li><a href="contact.html" onclick="closeMobileNav()">Contact</a></li>
         </ul>
       </nav>
@@ -332,48 +423,46 @@
     window.addEventListener("resize", showMobileWarning);
 
     // Hamburger & mobile nav behavior
+    // Hamburger & mobile nav behavior (slide-in version)
     (function () {
       const hamburger = document.getElementById('hamburger');
       const mobileNav = document.getElementById('mobile-nav');
       const closeBtn = document.getElementById('close-btn');
-
+      let animTimeout = null;
       function openMobileNav() {
-        mobileNav.classList.add('show');
+        clearTimeout(animTimeout);
+        mobileNav.classList.remove('slide-out');
+        mobileNav.classList.add('slide-in');
         hamburger.classList.add('open');
         hamburger.setAttribute('aria-expanded', 'true');
         mobileNav.setAttribute('aria-hidden', 'false');
-        // lock scroll
         document.documentElement.style.overflow = 'hidden';
         document.body.style.touchAction = 'none';
       }
-
       function closeMobileNav() {
-        mobileNav.classList.remove('show');
+        clearTimeout(animTimeout);
+        mobileNav.classList.remove('slide-in');
+        mobileNav.classList.add('slide-out');
         hamburger.classList.remove('open');
         hamburger.setAttribute('aria-expanded', 'false');
         mobileNav.setAttribute('aria-hidden', 'true');
         document.documentElement.style.overflow = '';
         document.body.style.touchAction = '';
+        animTimeout = setTimeout(() => {
+          mobileNav.classList.remove('slide-out');
+        }, 340);
       }
-
-      // expose for onclick in links
       window.closeMobileNav = closeMobileNav;
-
       hamburger && hamburger.addEventListener('click', function (e) {
-        const isOpen = mobileNav.classList.contains('show');
+        const isOpen = mobileNav.classList.contains('slide-in');
         if (isOpen) closeMobileNav(); else openMobileNav();
       });
-
       closeBtn && closeBtn.addEventListener('click', closeMobileNav);
-
-      // click outside to close
       document.addEventListener('click', function (e) {
         if (!mobileNav.contains(e.target) && !hamburger.contains(e.target)) {
           closeMobileNav();
         }
       });
-
-      // close on Escape
       document.addEventListener('keydown', function (e) {
         if (e.key === 'Escape') closeMobileNav();
       });
