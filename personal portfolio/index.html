@@ -1,256 +1,369 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Basic Meta Tags -->
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ashutosh Pandey | Front end Developer</title>
 
-  <!-- SEO Meta Tags -->
-  <title>Ashutosh Pandey | Front end Developer  </title>
+  <!-- Your existing site CSS -->
+  <link rel="stylesheet" href="style.css" />
+
   <meta name="description" content="Ashutosh Pandey is a frontend developer skilled in HTML, CSS, JavaScript, and React. Visit my portfolio to explore web development projects and contact me.">
-  <meta name="keywords" content="Ashutosh Pandey, Frontend Developer, Web Developer, HTML, CSS, JavaScript, React, Netlify, GitHub, Portfolio, Political Report, SEO, Political Infographics, Blog Owner">
-  <meta name="author" content="Ashutosh Pandey">
-  <meta name="robots" content="index, follow">
-  <meta name="language" content="English">
-  <meta name="revisit-after" content="7 days">
-
-  <!-- Canonical URL -->
   <link rel="canonical" href="https://pandeyjii.netlify.app" />
-
-  <!-- Open Graph for Social Sharing -->
-  <meta property="og:title" content="Ashutosh Pandey | Front end Developer" />
-  <meta property="og:description" content="Check out my web development projects and blog at Political Report. Connect for collaborations!" />
-  <meta property="og:image" content="pandey.jpg" />
-  <meta property="og:url" content="https://pandeyjii.netlify.app" />
-  <meta property="og:type" content="website" />
-
-  <!-- Twitter Card Meta Tags -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Ashutosh Pandey ">
-  <meta name="twitter:description" content="Explore my personal portfolio website, Political Report blog, and frontend projects.">
-  <meta name="twitter:image" content="pandey.jpg">
-  <meta name="twitter:site" content="@your_twitter_handle"> <!-- Optional -->
-
-  <!-- AOS Animation Library -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png" />
-
-  <!-- CSS File -->
-  <link rel="stylesheet" href="style.css" />
-  <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Ashutosh Pandey",
-  "url": "https://pandeyjii.netlify.app",
-  "sameAs": [
-    "https://github.com/ashu007ctrl",
-    "https://politicalreport.netlify.app"
-  ],
-  "jobTitle": "Frontend Developer",
-  "alumniOf": "BBD University, Lucknow",
-  "birthPlace": "Basti, Uttar Pradesh, India",
-  "gender": "Male"
-}
-</script>
-
-</head>
-
-<body>
-<div id="mobile-warning" class="mobile-warning">
-  <span class="warning-text">For the best experience, please switch to Desktop Mode.</span>
-  <span class="warning-close" onclick="hideWarning()">&times;</span>
-</div>
-
-<script>
-  function showMobileWarning() {
-    const warning = document.getElementById("mobile-warning");
-    if (window.innerWidth <= 768 && !localStorage.getItem("hideMobileWarning")) {
-      warning.style.display = "flex";
-    } else {
-      warning.style.display = "none";
+  <!-- Header & mobile overrides + custom three-row horizontal hamburger -->
+  <style>
+    /* Keep header row-style so logo left and hamburger right */
+    header .container.nav {
+      display: flex !important;
+      flex-direction: row !important;
+      justify-content: space-between !important;
+      align-items: center !important;
+      position: relative;
+      padding-left: 12px !important;
+      padding-right: 12px !important;
+      gap: 12px;
+      z-index: 3000;
     }
-  }
+    header .logo {
+      margin-left: 8px !important;
+      text-align: left !important;
+      font-weight: 800;
+      z-index: 3100;
+    }
+    .desktop-nav { display: block; }
 
-  function hideWarning() {
-    document.getElementById("mobile-warning").style.display = "none";
-    localStorage.setItem("hideMobileWarning", "true");
-  }
+    /* ===== CUSTOM THREE HORIZONTAL LINES (each on separate row) ===== */
+    .hamburger {
+      display: none; /* hidden on desktop */
+      width: 52px;
+      height: 44px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(255,255,255,0.88));
+      border-radius: 10px;
+      border: 1px solid rgba(0,0,0,0.06);
+      box-shadow: 0 6px 18px rgba(10,20,40,0.06);
+      align-items: center;
+      justify-content: center;
+      padding: 6px;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      margin-right: 10px !important;
+      transition: transform 160ms ease, box-shadow 160ms ease;
+      z-index: 3200;
+    }
+    .hamburger:active { transform: scale(0.98); }
 
-  window.addEventListener("load", showMobileWarning);
-  window.addEventListener("resize", showMobileWarning);
-</script>
+    /* Force column layout so each bar is on its own row */
+    .hamburger .bars {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px; /* spacing between rows */
+      width: 100%;
+    }
 
-  <!-- Navigation -->
+    /* Each horizontal bar (one per row) */
+    .hamburger .bar {
+      display: block;
+      width: 30px;     /* length of each horizontal line */
+      height: 4px;     /* thickness */
+      border-radius: 4px;
+      background: linear-gradient(90deg, #7a18f5 0%, #3a9cff 100%);
+      box-shadow: 0 2px 6px rgba(74, 20, 140, 0.14), inset 0 -1px 0 rgba(255,255,255,0.12);
+      transition: transform 260ms cubic-bezier(.2,.9,.2,1), opacity 200ms ease, width 200ms ease;
+      transform-origin: center;
+    }
+
+    /* Open (X) state: top and bottom rotate, middle fades */
+    .hamburger.open .bar-1 { transform: translateY(8px) rotate(45deg); }
+    .hamburger.open .bar-2 { opacity: 0; transform: scaleX(0); }
+    .hamburger.open .bar-3 { transform: translateY(-8px) rotate(-45deg); }
+
+    /* Mobile nav panel */
+    #mobile-nav {
+      display: none;
+      position: absolute;
+      top: calc(100% + 10px);
+      right: 12px;
+      width: 240px;
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 14px;
+      border: 1px solid rgba(0,0,0,0.06);
+      box-shadow: 0 12px 36px rgba(12, 24, 48, 0.12);
+      transform: translateY(-12px);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 300ms cubic-bezier(.2,.9,.2,1), opacity 260ms ease;
+      z-index: 3300;
+    }
+    #mobile-nav.show {
+      display: block;
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    #mobile-nav .close-btn {
+      text-align: right;
+      font-size: 20px;
+      font-weight: 700;
+      cursor: pointer;
+      margin-bottom: 10px;
+      color: #111;
+      line-height: 1;
+    }
+
+    #mobile-nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 6px 0 0 0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    #mobile-nav a {
+      text-decoration: none;
+      color: #111;
+      font-weight: 700;
+      padding: 8px 6px;
+      display: block;
+      border-radius: 6px;
+    }
+    #mobile-nav a:hover {
+      background: rgba(122,24,245,0.06);
+      color: #7a18f5;
+    }
+
+    /* MOBILE OVERRIDES */
+    @media (max-width: 768px) {
+      .desktop-nav { display: none !important; } /* hide desktop nav */
+      .hamburger { display: flex !important; }   /* show hamburger */
+      header .container.nav {
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+      }
+      .nav { flex-direction: row !important; align-items: center !important; }
+      header .logo { margin-left: 12px !important; text-align: left !important; }
+      .hero-content { align-items: flex-start; }
+      .hamburger { padding: 6px; }
+      nav#mobile-nav ul { align-items: flex-start; text-align: left; }
+    }
+
+    /* DESKTOP safety */
+    @media (min-width: 769px) {
+      .hamburger { display: none !important; }
+      #mobile-nav { display: none !important; }
+      .desktop-nav { display: block !important; }
+    }
+
+    /* small accessibility focus */
+    .hamburger:focus { outline: 2px solid rgba(122,24,245,0.25); outline-offset: 3px; }
+    #mobile-nav a:focus { outline: 2px dashed rgba(122,24,245,0.2); outline-offset: 3px; }
+  </style>
+</head>
+<body>
+  <!-- optional mobile warning -->
+  <div id="mobile-warning" class="mobile-warning" style="display:none;">
+    <span class="warning-text">For the best experience, please switch to Desktop Mode.</span>
+    <span class="warning-close" onclick="hideWarning()">&times;</span>
+  </div>
+
+  <!-- HEADER -->
   <header>
     <div class="container nav">
-      <div class="logo">Ashutosh Pandey <span>.</span></div>
-      <nav>
+      <!-- Logo left -->
+      <div class="logo" aria-label="Site owner">Ashutosh Pandey <span>.</span></div>
+
+      <!-- Desktop nav (unchanged) -->
+      <nav class="desktop-nav" aria-label="Primary navigation">
         <ul>
-          <li><a href="index.html" class="active ">Home</a></li>
-        
+          <li><a href="index.html" class="active">Home</a></li>
           <li><a href="portfolio.html">Projects</a></li>
-         
           <li><a href="contact.html">Contact</a></li>
         </ul>
       </nav>
-      <!-- <a href="contact.html" class="btn-primary">Let's Talk</a> -->
+
+      <!-- Custom three horizontal lines stacked in three rows -->
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" type="button">
+        <div class="bars">
+          <span class="bar bar-1"></span>
+          <span class="bar bar-2"></span>
+          <span class="bar bar-3"></span>
+        </div>
+      </button>
+
+      <!-- Mobile nav panel -->
+      <nav id="mobile-nav" aria-hidden="true">
+        <div class="close-btn" id="close-btn" aria-label="Close menu">&times;</div>
+        <ul>
+          <li><a href="index.html" onclick="closeMobileNav()">Home</a></li>
+          <li><a href="portfolio.html" onclick="closeMobileNav()">Projects</a></li>
+          <li><a href="contact.html" onclick="closeMobileNav()">Contact</a></li>
+        </ul>
+      </nav>
     </div>
   </header>
 
-  <!-- Hero Section -->
+  <!-- HERO -->
   <section class="hero">
     <div class="container hero-content">
       <div class="hero-text" data-aos="fade-right" data-aos-duration="1000">
         <h1>Hi, I'm <span class="highlight">Ashutosh Pandey</span></h1>
-        <h2>Frontend Developer </h2>
-      <p> I am a final-year student and a passionate frontend developer with a keen interest in creating dynamic and responsive web applications. I specialize in HTML, CSS, JavaScript, and React, and I am always eager to learn new technologies and improve my skills. My goal is to build user-friendly interfaces that enhance the user experience.</p>
-   <p>
-      I am also the founder of <a href="https://politicalreport.netlify.app" target="_blank"> <strong> Political Report</strong></a>, a personal blog plateform dedicated to political news and analysis. Through this platform, I aim to provide insightful content and engage with readers on important political issues.
-    </p>
-    <a href="contact.html" class="hire-me-btn"> Hire Me</a>
-      <a href="portfolio.html" class="projects-btn">See Projects</a>
-      </div>
-         <div class="hero-image" data-aos="fade-left">
-      <img src="pandey.jpg" alt="Ashutosh Pandey photo" />
-    </div>
-  </div>
-</section>
-  <section class="skill-info" data-aos="fade-up" data-aos-duration="1000">
-  <div class="container">
-    <h2 class="section-title">Skills & Tools </h2>
-    <div class="info-table">
-      <table>
-        <tbody>
-          <tr>
-            <td><strong>Web development</strong></td>
-            <td> HTML , CSS , JavaScript , React</td>
-          </tr>
-          <tr>
-            <td><strong>Programming</strong></td>
-            <td>Python , C , C++</td>
-          </tr>
-          <tr>
-            <td><strong>Tools</strong></td>
-            <td>VS Code , Github , Netlify , Canva </td>
-          </tr>
-          <tr>
-            <td><strong>Soft Skills</strong></td>
-            <td>Teamwork , Time Management , Quick Learner</td>
-          </tr>
-          
-        </tbody>
-      </table>
-     
-    </div>
-  </div>
-  <br>
-</section>
-<br>
-    <section class="educational-info" data-aos="fade-up" data-aos-duration="1000">
-  <div class="container">
-    <h2 class="section-title">Educational Qualification </h2>
-    <div class="info-table">
-      <table>
-        <tbody>
-          <tr>
-            <td><strong>B.TECH  (Honors)  </strong></td>
-            <td>BBD Educational Group , Lucknow (2022-2026) </td>
-          </tr>
-          <tr>
-            <td><strong>Major in </strong></td>
-            <td>Information Technology</td>
-          </tr>
-          <tr>
-            <td><strong>Specialization</strong></td>
-            <td>Cyber Security </td>
-          </tr>
-          <tr>
-            <td><strong>GPA </strong></td>
-            <td>8.6 (current average) </td>
-          </tr>
-           <tr>
-            <td><strong>Intermediate </strong></td>
-            <td>PCM with 81.3% - (2022) </td>
-          </tr>
-           <tr>
-            <td><strong>High School</strong></td>
-            <td>90.33 % - (2020) </td>
-          </tr>
-          
-          
-        </tbody>
-      </table>
-    </div>
-  </div>
-</section>
-<br>
-     <section class="personal-info" data-aos="fade-up" data-aos-duration="1000">
-  <div class="container">
-    <h2 class="section-title">Personal Information</h2>
-    <div class="info-table">
-      <table>
-        <tbody>
-          <tr>
-            <td><strong>Full Name</strong></td>
-            <td>Ashutosh Pandey</td>
-          </tr>
-         
-          <tr>
-            <td><strong>Born</strong></td>
-            <td>8th of June , 2005 </td>
-          </tr>
-          <tr>
-            <td><strong>Gender</strong></td>
-            <td>Male</td>
-          </tr>
-          
-          <tr>
-            <td><strong>Religion</strong></td>
-            <td>Hindu</td>
-          </tr>
-          <tr>
-            <td><strong>Marital Status </strong></td>
-            <td> Single</td>
-          </tr>
-           <tr>
-            <td><strong> E-Mail id </strong></td>
-            <td> pandey.ji.8642@gmail.com</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</section>
-  <br>
-
-
-   <footer>
-    <p><span style="color: black;">© 2025 All Rights Reserved !</span> </p>
-    
-        <div class="social-icons">
-         
-          <a href="#"><img src="https://img.icons8.com/ios-filled/24/linkedin.png" alt="LinkedIn"/></a>
-          <a href="#"><img src="https://img.icons8.com/ios-filled/24/facebook.png" alt="Facebook"/></a>
-          <a href="#"><img src="https://img.icons8.com/ios-filled/24/twitter.png" alt="Twitter"/></a>
+        <h2>Frontend Developer</h2>
+        <p>I am a final-year student and a passionate frontend developer with a keen interest in creating dynamic and responsive web applications. I specialize in HTML, CSS, JavaScript, and React, and I am always eager to learn new technologies and improve my skills. My goal is to build user-friendly interfaces that enhance the user experience.</p>
+        <p>I am also the founder of <a href="https://politicalreport.netlify.app" target="_blank"><strong>Political Report</strong></a>, a personal blog platform dedicated to political news and analysis.</p>
+        <div class="btn-group">
+          <a href="contact.html" class="hire-me-btn">Hire Me</a>
+          <a href="portfolio.html" class="projects-btn">See Projects</a>
         </div>
       </div>
-  </footer>
+
+      <div class="hero-image" data-aos="fade-left">
+        <img src="pandey.jpg" alt="Ashutosh Pandey photo" style="width:160px;height:160px;border-radius:12px;object-fit:cover;border:3px solid #7a18f5;">
+      </div>
     </div>
   </section>
 
-  <!-- AOS Script -->
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script>AOS.init();</script>
- 
+  <!-- SKILLS -->
+  <section class="skill-info" data-aos="fade-up" data-aos-duration="1000">
+    <div class="container">
+      <h2 class="section-title">Skills & Tools</h2>
+      <div class="info-table">
+        <table>
+          <tbody>
+            <tr><td><strong>Web development</strong></td><td>HTML, CSS, JavaScript, React</td></tr>
+            <tr><td><strong>Programming</strong></td><td>Python, C, C++</td></tr>
+            <tr><td><strong>Tools</strong></td><td>VS Code, Github, Netlify, Canva</td></tr>
+            <tr><td><strong>Soft Skills</strong></td><td>Teamwork, Time Management, Quick Learner</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
 
+  <!-- EDUCATION -->
+  <section class="educational-info" data-aos="fade-up" data-aos-duration="1000">
+    <div class="container">
+      <h2 class="section-title">Educational Qualification</h2>
+      <div class="info-table">
+        <table>
+          <tbody>
+            <tr><td><strong>B.TECH (Honors)</strong></td><td>BBD Educational Group, Lucknow (2022-2026)</td></tr>
+            <tr><td><strong>Major in</strong></td><td>Information Technology</td></tr>
+            <tr><td><strong>Specialization</strong></td><td>Cyber Security</td></tr>
+            <tr><td><strong>GPA</strong></td><td>8.6 (current average)</td></tr>
+            <tr><td><strong>Intermediate</strong></td><td>PCM with 81.3% - (2022)</td></tr>
+            <tr><td><strong>High School</strong></td><td>90.33 % - (2020)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- PERSONAL INFO -->
+  <section class="personal-info" data-aos="fade-up" data-aos-duration="1000">
+    <div class="container">
+      <h2 class="section-title">Personal Information</h2>
+      <div class="info-table">
+        <table>
+          <tbody>
+            <tr><td><strong>Full Name</strong></td><td>Ashutosh Pandey</td></tr>
+            <tr><td><strong>Born</strong></td><td>8th of June, 2005</td></tr>
+            <tr><td><strong>Gender</strong></td><td>Male</td></tr>
+            <tr><td><strong>Religion</strong></td><td>Hindu</td></tr>
+            <tr><td><strong>Marital Status</strong></td><td>Single</td></tr>
+            <tr><td><strong>E-Mail id</strong></td><td>pandey.ji.8642@gmail.com</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p><span style="color: black;">© 2025 All Rights Reserved !</span></p>
+    <div class="social-icons">
+      <a href="#"><img src="https://img.icons8.com/ios-filled/24/linkedin.png" alt="LinkedIn"/></a>
+      <a href="#"><img src="https://img.icons8.com/ios-filled/24/facebook.png" alt="Facebook"/></a>
+      <a href="#"><img src="https://img.icons8.com/ios-filled/24/twitter.png" alt="Twitter"/></a>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script>
+    // mobile warning
+    function showMobileWarning() {
+      const warning = document.getElementById("mobile-warning");
+      if (window.innerWidth <= 768 && !localStorage.getItem("hideMobileWarning")) {
+        warning.style.display = "flex";
+      } else {
+        warning.style.display = "none";
+      }
+    }
+    function hideWarning() {
+      const w = document.getElementById("mobile-warning");
+      if (w) w.style.display = "none";
+      localStorage.setItem("hideMobileWarning", "true");
+    }
+    window.addEventListener("load", showMobileWarning);
+    window.addEventListener("resize", showMobileWarning);
+
+    // Hamburger & mobile nav behavior
+    (function () {
+      const hamburger = document.getElementById('hamburger');
+      const mobileNav = document.getElementById('mobile-nav');
+      const closeBtn = document.getElementById('close-btn');
+
+      function openMobileNav() {
+        mobileNav.classList.add('show');
+        hamburger.classList.add('open');
+        hamburger.setAttribute('aria-expanded', 'true');
+        mobileNav.setAttribute('aria-hidden', 'false');
+        // lock scroll
+        document.documentElement.style.overflow = 'hidden';
+        document.body.style.touchAction = 'none';
+      }
+
+      function closeMobileNav() {
+        mobileNav.classList.remove('show');
+        hamburger.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+        mobileNav.setAttribute('aria-hidden', 'true');
+        document.documentElement.style.overflow = '';
+        document.body.style.touchAction = '';
+      }
+
+      // expose for onclick in links
+      window.closeMobileNav = closeMobileNav;
+
+      hamburger && hamburger.addEventListener('click', function (e) {
+        const isOpen = mobileNav.classList.contains('show');
+        if (isOpen) closeMobileNav(); else openMobileNav();
+      });
+
+      closeBtn && closeBtn.addEventListener('click', closeMobileNav);
+
+      // click outside to close
+      document.addEventListener('click', function (e) {
+        if (!mobileNav.contains(e.target) && !hamburger.contains(e.target)) {
+          closeMobileNav();
+        }
+      });
+
+      // close on Escape
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') closeMobileNav();
+      });
+    })();
+  </script>
+
+  <!-- AOS init -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>if (window.AOS) AOS.init();</script>
 </body>
 </html>
-
-
