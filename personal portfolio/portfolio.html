@@ -239,10 +239,11 @@
       box-shadow: inset 0 0 40px rgba(122, 24, 245, .08), 0 20px 60px rgba(0, 0, 0, .35);
       overflow: hidden;
       display: flex;
-      align-items: center;  
+      align-items: center;
       justify-content: center;
     }
-.hero-visual img {
+
+    .hero-visual img {
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -250,6 +251,7 @@
       display: block;
       transition: transform .25s ease;
     }
+
     .orb {
       position: absolute;
       border-radius: 50%;
@@ -436,9 +438,11 @@
         grid-column: span 12
       }
     }
-    .cta.reveal{
+
+    .cta.reveal {
       max-width: fit-content;
     }
+
     .cta.homepage {
       display: flex;
       justify-content: center;
@@ -446,7 +450,39 @@
       margin-top: 20px;
       max-width: fit-content;
     }
-    
+
+    /* Layout Fixes */
+    .cta-container {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 3rem;
+      margin-bottom: 2rem;
+      padding: 0 1rem;
+    }
+
+    .cta {
+      margin: 0 !important;
+      flex: 1;
+      max-width: 400px !important;
+    }
+
+    .cta.reveal {
+      max-width: none !important;
+      /* Override fit-content */
+    }
+
+    @media (max-width: 768px) {
+      .cta-container {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .cta {
+        width: 100%;
+        max-width: 100% !important;
+      }
+    }
   </style>
 </head>
 
@@ -471,14 +507,31 @@
       <div>
         <h1 class="title" data-aos="fade-up"> My Projects</h1>
         <p class="subtitle" data-aos="fade-up" data-aos-delay="120">
-         Welcome to the Projects page , I am a Frontend Developer focused on accessible UI, clean CSS, and content that connects people. Below is some of my completed and ongoing projects using skills mentioned below ...
+          Welcome to my Projects page. I am a full-stack software developer and final-year student with
+          experience in building secure, scalable, and user-centric applications. I enjoy working across the stack using
+          C++, Java, Python, and modern web technologies to solve real-world problems.
         </p>
         <div class="badge-row" data-aos="zoom-in" data-aos-delay="220">
+          <span class="chip"><i></i> Python</span>
+          <span class="chip"><i></i> Java</span>
+          <span class="chip"><i></i> C++</span>
+          <span class="chip"><i></i> C</span>
+
           <span class="chip"><i></i> HTML</span>
           <span class="chip"><i></i> CSS</span>
           <span class="chip"><i></i> JavaScript</span>
-          <span class="chip"><i></i> SEO</span>
-          <span class="chip"><i></i> Netlify</span>
+          <span class="chip"><i></i> React.js</span>
+          <span class="chip"><i></i> Node.js</span>
+          <span class="chip"><i></i> Express</span>
+          <span class="chip"><i></i> MongoDB</span>
+          <span class="chip"><i></i> My SQL</span>
+          <span class="chip"><i></i> Artifical Intelligence</span>
+          <span class="chip"><i></i> Machine Learning</span>
+          <span class="chip"><i></i> Power BI</span>
+          <span class="chip"><i></i> Git</span>
+          <span class="chip"><i></i> GitHub</span>
+          <span class="chip"><i></i> Figma</span>
+          <span class="chip"><i></i> Search Engine Optimization</span>
           <span class="chip"><i></i> Canva</span>
         </div>
       </div>
@@ -486,7 +539,7 @@
       <div class="hero-visual" data-aos="fade-left">
         <!-- <div class="orb one"></div>
         <div class="orb two"></div> -->
-        <img src="Portfolio.jpg" alt="Portfolio image" >
+        <img src="Portfolio.jpg" alt="Portfolio image">
       </div>
     </div>
   </section>
@@ -496,14 +549,86 @@
     <h2 data-aos="fade-up">Featured Projects</h2>
 
     <div class="grid">
+
+      <article class="card reveal" data-aos="fade-up" data-aos-delay="150">
+        <h3>🗳️ Votify – Online Secure Voting System</h3>
+        <p>End-to-end full-stack voting platform with secure user authentication, encrypted vote storage, role-based
+          access control, and real-time result management system with premium features.</p>
+        <div class="meta">
+          <span class="pill">React.js</span>
+          <span class="pill">Node.js</span>
+          <span class="pill">Express</span>
+          <span class="pill">MongoDB</span>
+          <span class="pill">Security</span>
+          <span class="pill">Authentication</span>
+          <span class="pill">Encryption</span>
+
+        </div>
+        <div class="actions">
+          <a class="btn-primary" href="https://votifyapp.netlify.app" target="_blank" rel="noopener">View Project</a>
+        </div>
+      </article>
+
+      <article class="card reveal" data-aos="fade-up" data-aos-delay="150">
+        <h3>🤖 Comfy – AI-Driven Stress Analyzer</h3>
+        <p>Full-stack AI application that analyzes user inputs using machine learning models, processes data via backend
+          APIs, and delivers real-time stress insights through an interactive dashboard.</p>
+        <div class="meta">
+          <span class="pill">React.js</span>
+          <span class="pill">Python</span>
+          <span class="pill">Artificial Intelligence</span>
+          <span class="pill">Machine Learning</span>
+          <span class="pill">Flask</span>
+          <span class="pill">MongoDB</span>
+        </div>
+        <div class="actions">
+          <a class="btn-primary" href="https://mycomfyy.netlify.app" target="_blank" rel="noopener">View Project</a>
+        </div>
+      </article>
+
+      <article class="card reveal" data-aos="fade-up" data-aos-delay="150">
+        <h3>🎧 Suno – PDF to Audiobook Converter</h3>
+        <p>Full-stack web application that converts PDFs into audiobooks using an automated PDF-to-text extraction and
+          text-to-speech pipeline, supporting Hindi and English with robust error handling and reducing processing time
+          by up to 50%.</p>
+        <div class="meta">
+          <span class="pill">Python</span>
+          <span class="pill">JavaScript</span>
+          <span class="pill">Text-to-Speech</span>
+          <span class="pill">PDF Processing</span>
+          <span class="pill">APIs</span>
+        </div>
+        <div class="actions">
+          <a class="btn-primary" href="#" target="_blank" rel="noopener">View Project</a>
+        </div>
+      </article>
+
+      <article class="card reveal" data-aos="fade-up" data-aos-delay="150">
+        <h3>🛍️ Meesho Clone – E-Commerce Platform</h3>
+        <p>Full-stack e-commerce platform inspired by Meesho, featuring user authentication, product listings, cart
+          management, order flow, and responsive UI for a seamless shopping experience, having 3000+ impressions, 100+
+          clicks from more than 20 countries around the globe.</p>
+        <div class="meta">
+          <span class="pill">React.js</span>
+          <span class="pill">Node.js</span>
+          <span class="pill">Express</span>
+          <span class="pill">MongoDB</span>
+          <span class="pill">REST APIs</span>
+        </div>
+        <div class="actions">
+          <a class="btn-primary" href="https://meeshoindia.netlify.app" target="_blank" rel="noopener">View Project</a>
+        </div>
+      </article>
+
+
       <!-- Political Report -->
       <article class="card reveal" data-aos="fade-up">
         <h3>📰 Political Report</h3>
         <p>A self-started blog with political comparisons, current issues, and election insights — written simply for
-          India’s youth.</p>
+          India’s youth, having 4000+ impressions across more than 50 countries.</p>
         <div class="meta">
-          <span class="pill">HTML</span><span class="pill">CSS</span><span class="pill">SEO</span><span
-            class="pill">Blogging</span><span class="pill">Canva</span>
+          <span class="pill">HTML</span><span class="pill">CSS</span> <span class="pill">CSS</span><span
+            class="pill">SEO</span><span class="pill">Blogging</span><span class="pill">Canva</span>
         </div>
         <div class="actions">
           <a class="btn-primary" href="https://politicalreport.netlify.app" target="_blank" rel="noopener">Visit
@@ -513,81 +638,103 @@
         </div>
       </article>
 
-      <!-- Personal Portfolio -->
-      <article class="card reveal" data-aos="fade-up" data-aos-delay="100">
-        <h3>👤 Personal Portfolio</h3>
-        <p>A clean, responsive portfolio highlighting my web development and blogging expertise with fast-loading pages
-          and polished UI.</p>
-        <div class="meta">
-          <span class="pill">HTML</span><span class="pill">CSS</span><span class="pill">JavaScript</span><span
-            class="pill">SEO</span>
-        </div>
-        <div class="actions">
-          <a class="btn-primary" href="https://pandeyjii.netlify.app" target="_blank" rel="noopener">Visit Portfolio</a>
-          <a class="ghost" href="contact.html">Hire Me</a>
-        </div>
-      </article>
-
-  <article class="card reveal" data-aos="fade-up" data-aos-delay="100">
-        <h3>👤 Calculator</h3>
-        <p>A clean, responsive calculator with
-           polished UI.</p>
-        <div class="meta">
-          <span class="pill">HTML</span><span class="pill">CSS</span><span class="pill">JavaScript</span><span
-            class="pill">SEO</span>
-        </div>
-        <div class="actions">
-          <a class="btn-primary" href="https://ashu007ctrl.github.io/calculator/" target="_blank" rel="noopener">Visit Calculator</a>
-  
-        </div>
-      </article>
-
-
-
-
-
-      
       <!-- E-Commerce Homepage -->
       <article class="card reveal" data-aos="fade-up" data-aos-delay="150">
         <h3>🛒 Shopping Mall E‑Commerce </h3>
         <p>Pixel‑perfect homepage with category search and price filtering components, built using modern, semantic HTML
           and clean CSS.</p>
         <div class="meta">
-          <span class="pill">HTML</span><span class="pill">CSS</span><span class="pill">Flexbox</span><span
-            class="pill">Grid</span>
+          <span class="pill">React.js</span><span class="pill">Flexbox</span><span class="pill">Grid</span>
         </div>
         <div class="actions">
-          <a class="btn-primary" href="https://shoppingmall1.netlify.app" target="_blank" rel="noopener"> Shopping  Mall</a>
-          
-        </div>
-      </article>
+          <a class="btn-primary" href="https://shoppingmall1.netlify.app" target="_blank" rel="noopener"> Shopping
+            Mall</a>
 
-      <!-- Tic Tac Toe -->
-      <article class="card reveal" data-aos="fade-up" data-aos-delay="220">
-        <h3>🎮 Tic Tac Toe with Unbeatable AI</h3>
-        <p>Modern Tic Tac Toe playable against another player or an unbeatable AI (Minimax). Stylish UI, responsive
-          layout, and win animations.</p>
-        <div class="meta">
-          <span class="pill">HTML</span><span class="pill">CSS</span><span class="pill">JavaScript</span><span
-            class="pill">Minimax</span>
         </div>
-        <div class="actions">
-          <a class="btn-primary" href="game.html" target="_blank" rel="noopener">Play Now</a>
-          <a class="ghost" href="contact.html">Request Source</a>
-        </div>
+
       </article>
     </div>
+    <br>
+    <section class="section">
+      <h2 data-aos="fade-up">Some Other Useful Projects</h2>
+
+      <div class="grid">
+        <!-- Tic Tac Toe -->
+        <article class="card reveal" data-aos="fade-up" data-aos-delay="220">
+          <h3>🎮 Tic Tac Toe with Unbeatable AI</h3>
+          <p>Modern Tic Tac Toe playable game against another player or an unbeatable AI (Minimax). Stylish UI,
+            responsive
+            layout, and win animations.</p>
+          <div class="meta">
+            <!-- <span class="pill">HTML</span><span class="pill">CSS</span><span class="pill">JavaScript</span><span
+            class="pill">Minimax</span> -->
+          </div>
+          <div class="actions">
+            <a class="btn-primary" href="game.html" target="_blank" rel="noopener">Play Now</a>
+          </div>
+        </article>
+
+        <!-- Calculator -->
+        <article class="card reveal" data-aos="fade-up" data-aos-delay="100">
+          <h3>👤 Calculator</h3>
+          <p>A clean, responsive calculator with
+            polished UI.</p>
+          <div class="meta">
+            <!-- <span class="pill">HTML</span><span class="pill">CSS</span><span class="pill">JavaScript</span><span
+            class="pill">SEO</span>
+        </div> -->
+            <div class="actions">
+              <a class="btn-primary" href="https://ashu007ctrl.github.io/calculator/" target="_blank"
+                rel="noopener">Have a look !</a>
+
+            </div>
+
+            <!-- Personal Portfolio -->
+        </article>
+
+        <article class="card reveal" data-aos="fade-up" data-aos-delay="100">
+          <h3>🍽️ Ramu Kaka – Restaurant Website</h3>
+          <p>A modern, responsive restaurant website showcasing menu, ambience, and contact details with a clean UI and
+            smooth user experience.</p>
+
+          <div class="actions">
+            <a class="btn-primary" href=" https://ashu007ctrl.github.io/restaurant/" target="_blank" rel="noopener">Have
+              a look!</a>
+          </div>
+        </article>
+
+        <article class="card reveal" data-aos="fade-up" data-aos-delay="100">
+          <h3>👤 Personal Portfolio</h3>
+          <p>A clean, responsive portfolio highlighting my web development and blogging expertise with fast-loading
+            pages
+            and polished UI.</p>
+          <div class="meta">
+            <!-- <span class="pill">HTML</span><span class="pill">CSS</span><span class="pill">JavaScript</span><span
+            class="pill">SEO</span> -->
+          </div>
+          <div class="actions">
+            <a class="btn-primary" href="https://pandeyjii.netlify.app" target="_blank" rel="noopener">Visit
+              Portfolio</a>
+
+          </div>
+        </article>
+
+      </div>
+    </section>
 
     <!-- CTA -->
-    <div class="cta reveal" data-aos="zoom-in" data-aos-delay="120">
-      <h3 style="margin:0 1 6px">Have a project in mind?</h3>
-      
-      <a class="btn-primary" href="contact.html">Get in touch</a>
+    <div class="cta-container">
+      <div class="cta reveal" data-aos="zoom-in" data-aos-delay="120">
+        <h3 style="margin:0 1 6px">Have a project in mind?</h3>
+        <a class="btn-primary" href="contact.html">Get in touch</a>
+      </div>
+      <div class="cta reveal" data-aos="zoom-in" data-aos-delay="120">
+        <h3 style="margin:0 1 6px">View or Download Resume </h3>
+        <a class="btn-primary" href="resume.pdf" target="_blank" rel="noopener">Download Resume</a>
+      </div>
     </div>
-    
-    </div>
- 
   </section>
+
 
   <!-- Scripts -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -610,9 +757,3 @@
 
 
 </html>
-
-
-
-
-
-
